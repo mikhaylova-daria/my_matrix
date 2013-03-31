@@ -4,14 +4,20 @@
 int main() {
     Matrix <double, 4, 3> a;
     Matrix <double, 3, 4> b;
-    Matrix <double, 3, 3> E(1);
-    Matrix <double, 4, 4> buf;
+    Matrix <int, 3, 3> c;
+    Matrix <int, 3, 3> d;
+    Matrix <int, 3, 4> e;
+    Matrix <int, 4, 2> f;
+    Matrix <int, 3, 2> g;
     a.input();
+    b.output();
+    b =
     std::cout<<"\n";
-    b = a.T();
+    //b = a.T();
+    b.output();
    // b = a.gaussMethod(0, buf);
-    //b = a.inverse();
-  //  b.output();
+    //d = a.inverse();
+
     std::cout<<"\n";
     //buf.output();
      std::cout<<"\n";

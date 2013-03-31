@@ -3,6 +3,10 @@
 #ifndef LIBR_H
     #include "libr.h"
 #endif
+
+
+///////////////Конструктор по умолчанию\\\\\\\\\\\\\\\
+
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid>::Matrix():hi(_hi), wid(_wid){
     try {
@@ -19,6 +23,7 @@ Matrix<Type, _hi, _wid>::Matrix():hi(_hi), wid(_wid){
     }
 }
 
+//////////////Конструктор копирования\\\\\\\\\
 
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid>::Matrix (Matrix<Type, _hi, _wid> const& a):hi(_hi), wid(_wid){
@@ -41,6 +46,8 @@ Matrix<Type, _hi, _wid>::Matrix (Matrix<Type, _hi, _wid> const& a):hi(_hi), wid(
     }
 }
 
+//////////////    Деструктор   \\\\\\\\\
+
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid>::~Matrix() {
     for (int i = 0; i < hi; ++i) {
@@ -48,6 +55,9 @@ Matrix<Type, _hi, _wid>::~Matrix() {
     }
     delete[] (this->matrix);
 }
+
+
+//////////////   ИНДЕКСАЦИЯ  \\\\\\\\\
 
 template <typename Type, int _hi, int _wid>
 Type* Matrix <Type , _hi, _wid>::operator [](int i) {
@@ -59,6 +69,9 @@ Type* Matrix <Type , _hi, _wid>::operator [](int i) {
     }
 }
 
+
+//////////////   ВВОД  \\\\\\\\\
+
 template <typename Type, int _hi, int _wid>
 void Matrix<Type, _hi, _wid>::input () {
     for (int i = 0; i < _hi; ++i) {
@@ -67,6 +80,9 @@ void Matrix<Type, _hi, _wid>::input () {
         }
     }
 }
+
+
+//////////////   ВЫВОД \\\\\\\\\
 
 template <typename Type, int _hi, int _wid>
 void Matrix<Type, _hi, _wid>::output() {
@@ -79,6 +95,10 @@ void Matrix<Type, _hi, _wid>::output() {
     }
 }
 
+
+
+//////////////  СЛОЖЕНИЕ  \\\\\\\\\
+
 template <typename Type, int _hi, int _wid>
 Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator + (Matrix a){
     Matrix<Type, _hi, _wid> result;
@@ -89,6 +109,9 @@ Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator + (Matrix a){
     }
     return result;
 }
+
+
+//////////////   ВЫЧИТАНИЕ  \\\\\\\\\
 
 template <typename Type, int _hi, int _wid>
 Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator - (Matrix a){
@@ -101,6 +124,12 @@ Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator - (Matrix a){
     return result;
 }
 
+
+
+
+//////////////   ПРИСВАИВАНИЕ \\\\\\\\\
+
+
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (Matrix a){
     for (int i = 0; i < _hi; ++i) {
@@ -110,6 +139,9 @@ Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (Matrix a){
     }
     return *this;
 }
+
+
+//////////////  ТРАНСПОНИРОВАНИЕ \\\\\\\\\
 
 template <typename Type, int _hi, int _wid>
 Matrix <Type, _wid, _hi>  Matrix <Type, _hi, _wid>::T()
@@ -123,7 +155,46 @@ Matrix <Type, _wid, _hi>  Matrix <Type, _hi, _wid>::T()
     return A;
 }
 
+//////////////   УМНОЖЕНИЕ  \\\\\\\\\
+///----------ОТДЕЛЬНЫЙ КЛАСС------\\\\
+
+template <typename Type, int _hi, int _wid,  int _wid_1, int _hi_2, template <typename Type, int _hi, int _wid> class Matrix_answer, template <typename Type, int _hi, int _wid_1> class Matrix_1, template <typename Type, int _hi_2, int _wid> class Matrix_2 >
+class Product
+{
+public:
+    Matrix_answer <Type, _hi, _wid> result;
+    Matrix_1 <Type, _hi, _wid_1> a;
+    Matrix_2 <Type, _hi_2, _wid> b;
+public:
+    Product(Matrix_1 <Type, _hi, _wid_1> _a, Matrix_2 <Type, _hi_2, _wid> _b){
+        a = _a;
+        b = _b;
+        Type null (0);
+        Type sum(0);
+        for (int i = 0; i < _hi; ++i) {
+            for (int j = 0; j < _wid; ++j) {
+                for (int k = 0; k < _wid_1; ++k){
+                    sum = sum + a[i][k] * b[k][j];
+                }
+                result[i][j] = sum;
+                sum = null;
+            }
+        }
+    }
+    ~Product() {;
+    }
+
+};
+
+
+
+//////////////////////////////////////////////
 //////-----КВАДРАТНЫЕ МАТРИЦЫ------\\\\\\\\\\\
+//////////////////////////////////////////////
+
+
+
+//////////////   КОНСТРУКТОР ПО УМОЛЧАНИЮ  \\\\\\\\\
 
 template <typename Type, int _n>
 Matrix<Type, _n, _n>::Matrix():n(_n){
@@ -141,6 +212,9 @@ Matrix<Type, _n, _n>::Matrix():n(_n){
     }
 }
 
+
+
+//////////////   КОНСТРУКТОР ДЛЯ ДИАГОНАЛЬНОЙ МАТРИЦЫ ОТ ЭЛЕМЕНТА ТИПА  \\\\\\\\\
 
 template <typename Type, int _n>
 Matrix<Type, _n, _n>::Matrix(Type x):n(_n){
@@ -165,6 +239,11 @@ Matrix<Type, _n, _n>::Matrix(Type x):n(_n){
     }
 }
 
+
+
+//////////////   КОПИРОВАНИЯ \\\\\\\\\
+
+
 template <typename Type, int _n>
 Matrix<Type, _n, _n>::Matrix (Matrix<Type, _n, _n> const& a):n(_n){
     try {
@@ -186,6 +265,9 @@ Matrix<Type, _n, _n>::Matrix (Matrix<Type, _n, _n> const& a):n(_n){
     }
 }
 
+
+//////////////   ДЕСТРУКТОР  \\\\\\\\\
+
 template <typename Type, int _n>
 Matrix<Type, _n, _n>::~Matrix() {
     for (int i = 0; i < n; ++i) {
@@ -193,6 +275,9 @@ Matrix<Type, _n, _n>::~Matrix() {
     }
     delete[] (this->matrix);
 }
+
+
+//////////////   ИНДЕКСАЦИЯ  \\\\\\\\\
 
 template <typename Type, int _n>
 Type* Matrix <Type , _n, _n>::operator [](int i) {
@@ -204,6 +289,10 @@ Type* Matrix <Type , _n, _n>::operator [](int i) {
     }
 }
 
+
+
+//////////////   ВВОД \\\\\\\\\
+
 template <typename Type, int _n>
 void Matrix <Type, _n, _n>::input () {
     for (int i = 0; i < _n; ++i) {
@@ -212,6 +301,9 @@ void Matrix <Type, _n, _n>::input () {
         }
     }
 }
+
+
+//////////////   ВЫВОД  \\\\\\\\\
 
 template <typename Type, int _n>
 void Matrix <Type, _n, _n>::output() {
@@ -224,6 +316,9 @@ void Matrix <Type, _n, _n>::output() {
     }
 }
 
+
+//////////////   СЛОЖЕНИЕ \\\\\\\\\
+
 template <typename Type, int _n>
 Matrix <Type, _n, _n> Matrix<Type, _n,_n>::operator + (Matrix a){
     Matrix<Type, _n, _n> result;
@@ -234,6 +329,9 @@ Matrix <Type, _n, _n> Matrix<Type, _n,_n>::operator + (Matrix a){
     }
     return result;
 }
+
+
+//////////////   ВЫЧИТАНИЕ  \\\\\\\\\
 
 template <typename Type, int _n>
 Matrix <Type, _n, _n> Matrix<Type, _n, _n>::operator - (Matrix a){
@@ -246,6 +344,9 @@ Matrix <Type, _n, _n> Matrix<Type, _n, _n>::operator - (Matrix a){
     return result;
 }
 
+
+//////////////   ПРИСВАИВАНИЕ  \\\\\\\\\
+
 template <typename Type, int _n>
 Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix a){
     for (int i = 0; i < _n; ++i) {
@@ -256,6 +357,8 @@ Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix a){
     return *this;
 }
 
+
+//////////////   ОПЕРАТОР УМНОЖЕНИЯ  \\\\\\\\\
 
 template <typename Type, int _n>
     Matrix<Type, _n, _n>  Matrix<Type, _n, _n>::operator * (Matrix a){
@@ -275,6 +378,8 @@ template <typename Type, int _n>
 }
 
 
+    //////////////  СЛЕД  \\\\\\\\\
+
 template <typename Type, int _n>
 Type Matrix<Type, _n, _n>::trace(){
     Type result(0);
@@ -283,6 +388,9 @@ Type Matrix<Type, _n, _n>::trace(){
     }
     return result;
 }
+
+
+//////////////   DET  \\\\\\\\\
 
 template <typename Type, int _n>
 double Matrix <Type, _n, _n>::det(){
@@ -296,6 +404,9 @@ double Matrix <Type, _n, _n>::det(){
     return result;
 }
 
+
+//////////////   ТРАНСПОНИРОВАНИЕ  \\\\\\\\\
+
 template <typename Type, int _n>
 Matrix<Type, _n, _n>  Matrix <Type, _n, _n>::T()
 {
@@ -307,6 +418,9 @@ Matrix<Type, _n, _n>  Matrix <Type, _n, _n>::T()
     }
     return A;
 }
+
+
+//////////////   ГАУСС  \\\\\\\\\
 
 template <typename Type, int _n>
 Matrix <double, _n, _n> Matrix<Type, _n, _n>::gaussMethod(double eps, Matrix <double, _n,_n> &B)
@@ -368,6 +482,9 @@ Matrix <double, _n, _n> Matrix<Type, _n, _n>::gaussMethod(double eps, Matrix <do
 }
 
 
+
+//////////////   ОБРАТНАЯ  \\\\\\\\\
+
 template <typename Type, int _n>
 Matrix <double, _n, _n> Matrix<Type, _n, _n>::inverse() {
     Type null(0);
@@ -399,33 +516,6 @@ Matrix <double, _n, _n> Matrix<Type, _n, _n>::inverse() {
 
 
 
-template <typename Type, int _hi, int _wid,  int _wid_1, int _hi_2, template <typename Type, int _hi, int _wid> class Matrix_answer, template <typename Type, int _hi, int _wid_1> class Matrix_1, template <typename Type, int _hi_2, int _wid> class Matrix_2 >
-class Product
-{
-public:
-    Matrix_answer <Type, _hi, _wid> result;
-    Matrix_1 <Type, _hi, _wid_1> a;
-    Matrix_2 <Type, _hi_2, _wid> b;
-public:
-    Product(Matrix_1 <Type, _hi, _wid_1> _a, Matrix_2 <Type, _hi_2, _wid> _b){
-        a = _a;
-        b = _b;
-        Type null (0);
-        Type sum(0);
-        for (int i = 0; i < _hi; ++i) {
-            for (int j = 0; j < _wid; ++j) {
-                for (int k = 0; k < _wid_1; ++k){
-                    sum = sum + a[i][k] * b[k][j];
-                }
-                result[i][j] = sum;
-                sum = null;
-            }
-        }
-    }
-    ~Product() {;
-    }
-
-};
 
 
 
