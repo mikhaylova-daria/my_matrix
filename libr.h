@@ -24,13 +24,35 @@ template <typename Type, int _hi, int _wid> class Matrix {
     Type **matrix;
 public:
     Matrix();
+    Matrix (const Matrix&);
     ~Matrix();
     Matrix operator + (Matrix a);
     Matrix operator - (Matrix a);
-    Matrix operator * (Matrix a);
     Type* operator [](int i);
+    Matrix& operator = (Matrix a);
+    Matrix<Type, _wid, _hi> T();
+    void input();
+    void output();
+};
+
+template <typename Type, int _n> class Matrix <Type, _n, _n> {
+    int n;
+    Type **matrix;
+public:
+    Matrix ();
+    Matrix (Type);
+    Matrix (const Matrix&);
+    ~Matrix ();
+    Matrix operator + (Matrix a);
+    Matrix operator - (Matrix a);
+    Matrix operator * (Matrix a);
+    Type* operator [] (int i);
+    Matrix& operator = (Matrix a);
     Matrix T();
-    Matrix inverse();
+    Matrix<double, _n,_n> inverse();
+    Matrix<double, _n, _n> gaussMethod(double, Matrix <double, _n,_n> &B);
+    Type trace();
+    double det();
     void input();
     void output();
 };
