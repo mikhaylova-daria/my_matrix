@@ -5,7 +5,7 @@
 #endif
 
 
-///////////////Конструктор по умолчанию\\\\\\\\\\\\\\\
+///////////////Конструктор по умолчанию
 
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid>::Matrix():hi(_hi), wid(_wid){
@@ -23,7 +23,7 @@ Matrix<Type, _hi, _wid>::Matrix():hi(_hi), wid(_wid){
     }
 }
 
-//////////////Конструктор копирования\\\\\\\\\
+//////////////Конструктор копирования
 
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid>::Matrix (Matrix<Type, _hi, _wid> const& a):hi(_hi), wid(_wid){
@@ -46,7 +46,7 @@ Matrix<Type, _hi, _wid>::Matrix (Matrix<Type, _hi, _wid> const& a):hi(_hi), wid(
     }
 }
 
-//////////////    Деструктор   \\\\\\\\\
+//////////////    Деструктор
 
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid>::~Matrix() {
@@ -57,7 +57,7 @@ Matrix<Type, _hi, _wid>::~Matrix() {
 }
 
 
-//////////////   ИНДЕКСАЦИЯ  \\\\\\\\\
+//////////////   ИНДЕКСАЦИЯ
 
 template <typename Type, int _hi, int _wid>
 Type* Matrix <Type , _hi, _wid>::operator [](int i) {
@@ -70,7 +70,7 @@ Type* Matrix <Type , _hi, _wid>::operator [](int i) {
 }
 
 
-//////////////   ВВОД  \\\\\\\\\
+//////////////   ВВОД
 
 template <typename Type, int _hi, int _wid>
 void Matrix<Type, _hi, _wid>::input () {
@@ -82,8 +82,7 @@ void Matrix<Type, _hi, _wid>::input () {
 }
 
 
-//////////////   ВЫВОД \\\\\\\\\
-
+//////////////   ВЫВОД
 template <typename Type, int _hi, int _wid>
 void Matrix<Type, _hi, _wid>::output() {
     for (int i = 0; i < _hi; ++i) {
@@ -97,7 +96,7 @@ void Matrix<Type, _hi, _wid>::output() {
 
 
 
-//////////////  СЛОЖЕНИЕ  \\\\\\\\\
+//////////////  СЛОЖЕНИЕ
 
 template <typename Type, int _hi, int _wid>
 Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator + (Matrix a){
@@ -111,7 +110,7 @@ Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator + (Matrix a){
 }
 
 
-//////////////   ВЫЧИТАНИЕ  \\\\\\\\\
+//////////////   ВЫЧИТАНИЕ
 
 template <typename Type, int _hi, int _wid>
 Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator - (Matrix a){
@@ -127,9 +126,7 @@ Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator - (Matrix a){
 
 
 
-//////////////   ПРИСВАИВАНИЕ \\\\\\\\\
-
-
+//////////////   ПРИСВАИВАНИЕ
 template <typename Type, int _hi, int _wid>
 Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (Matrix a){
     for (int i = 0; i < _hi; ++i) {
@@ -141,7 +138,7 @@ Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (Matrix a){
 }
 
 
-//////////////  ТРАНСПОНИРОВАНИЕ \\\\\\\\\
+//////////////  ТРАНСПОНИРОВАНИЕ
 
 template <typename Type, int _hi, int _wid>
 Matrix <Type, _wid, _hi>  Matrix <Type, _hi, _wid>::T()
@@ -155,8 +152,8 @@ Matrix <Type, _wid, _hi>  Matrix <Type, _hi, _wid>::T()
     return A;
 }
 
-//////////////   УМНОЖЕНИЕ  \\\\\\\\\
-///----------ОТДЕЛЬНЫЙ КЛАСС------\\\\
+//////////////   УМНОЖЕНИЕ
+///----------ОТДЕЛЬНЫЙ КЛАСС------
 
 template <typename Type, int _hi, int _wid,  int _wid_1, int _hi_2, template <typename Type, int _hi, int _wid> class Matrix_answer, template <typename Type, int _hi, int _wid_1> class Matrix_1, template <typename Type, int _hi_2, int _wid> class Matrix_2 >
 class Product
@@ -194,7 +191,7 @@ public:
 
 
 
-//////////////   КОНСТРУКТОР ПО УМОЛЧАНИЮ  \\\\\\\\\
+//////////////   КОНСТРУКТОР ПО УМОЛЧАНИЮ
 
 template <typename Type, int _n>
 Matrix<Type, _n, _n>::Matrix():n(_n){
@@ -214,7 +211,7 @@ Matrix<Type, _n, _n>::Matrix():n(_n){
 
 
 
-//////////////   КОНСТРУКТОР ДЛЯ ДИАГОНАЛЬНОЙ МАТРИЦЫ ОТ ЭЛЕМЕНТА ТИПА  \\\\\\\\\
+//////////////   КОНСТРУКТОР ДЛЯ ДИАГОНАЛЬНОЙ МАТРИЦЫ ОТ ЭЛЕМЕНТА ТИПА
 
 template <typename Type, int _n>
 Matrix<Type, _n, _n>::Matrix(Type x):n(_n){
@@ -241,7 +238,7 @@ Matrix<Type, _n, _n>::Matrix(Type x):n(_n){
 
 
 
-//////////////   КОПИРОВАНИЯ \\\\\\\\\
+//////////////   КОПИРОВАНИЯ
 
 
 template <typename Type, int _n>
@@ -266,7 +263,7 @@ Matrix<Type, _n, _n>::Matrix (Matrix<Type, _n, _n> const& a):n(_n){
 }
 
 
-//////////////   ДЕСТРУКТОР  \\\\\\\\\
+//////////////   ДЕСТРУКТОР
 
 template <typename Type, int _n>
 Matrix<Type, _n, _n>::~Matrix() {
@@ -277,7 +274,7 @@ Matrix<Type, _n, _n>::~Matrix() {
 }
 
 
-//////////////   ИНДЕКСАЦИЯ  \\\\\\\\\
+//////////////   ИНДЕКСАЦИЯ
 
 template <typename Type, int _n>
 Type* Matrix <Type , _n, _n>::operator [](int i) {
@@ -291,7 +288,7 @@ Type* Matrix <Type , _n, _n>::operator [](int i) {
 
 
 
-//////////////   ВВОД \\\\\\\\\
+//////////////   ВВОД
 
 template <typename Type, int _n>
 void Matrix <Type, _n, _n>::input () {
@@ -303,7 +300,7 @@ void Matrix <Type, _n, _n>::input () {
 }
 
 
-//////////////   ВЫВОД  \\\\\\\\\
+//////////////   ВЫВОД
 
 template <typename Type, int _n>
 void Matrix <Type, _n, _n>::output() {
@@ -317,7 +314,7 @@ void Matrix <Type, _n, _n>::output() {
 }
 
 
-//////////////   СЛОЖЕНИЕ \\\\\\\\\
+//////////////   СЛОЖЕНИЕ
 
 template <typename Type, int _n>
 Matrix <Type, _n, _n> Matrix<Type, _n,_n>::operator + (Matrix a){
@@ -331,7 +328,7 @@ Matrix <Type, _n, _n> Matrix<Type, _n,_n>::operator + (Matrix a){
 }
 
 
-//////////////   ВЫЧИТАНИЕ  \\\\\\\\\
+//////////////   ВЫЧИТАНИЕ
 
 template <typename Type, int _n>
 Matrix <Type, _n, _n> Matrix<Type, _n, _n>::operator - (Matrix a){
@@ -345,7 +342,7 @@ Matrix <Type, _n, _n> Matrix<Type, _n, _n>::operator - (Matrix a){
 }
 
 
-//////////////   ПРИСВАИВАНИЕ  \\\\\\\\\
+//////////////   ПРИСВАИВАНИЕ
 
 template <typename Type, int _n>
 Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix a){
@@ -358,7 +355,7 @@ Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix a){
 }
 
 
-//////////////   ОПЕРАТОР УМНОЖЕНИЯ  \\\\\\\\\
+//////////////   ОПЕРАТОР УМНОЖЕНИЯ
 
 template <typename Type, int _n>
     Matrix<Type, _n, _n>  Matrix<Type, _n, _n>::operator * (Matrix a){
@@ -378,7 +375,7 @@ template <typename Type, int _n>
 }
 
 
-    //////////////  СЛЕД  \\\\\\\\\
+    //////////////  СЛЕД
 
 template <typename Type, int _n>
 Type Matrix<Type, _n, _n>::trace(){
@@ -390,7 +387,7 @@ Type Matrix<Type, _n, _n>::trace(){
 }
 
 
-//////////////   DET  \\\\\\\\\
+//////////////   DET
 
 template <typename Type, int _n>
 double Matrix <Type, _n, _n>::det(){
@@ -405,7 +402,7 @@ double Matrix <Type, _n, _n>::det(){
 }
 
 
-//////////////   ТРАНСПОНИРОВАНИЕ  \\\\\\\\\
+//////////////   ТРАНСПОНИРОВАНИЕ
 
 template <typename Type, int _n>
 Matrix<Type, _n, _n>  Matrix <Type, _n, _n>::T()
@@ -420,7 +417,7 @@ Matrix<Type, _n, _n>  Matrix <Type, _n, _n>::T()
 }
 
 
-//////////////   ГАУСС  \\\\\\\\\
+//////////////   ГАУСС
 
 template <typename Type, int _n>
 Matrix <double, _n, _n> Matrix<Type, _n, _n>::gaussMethod(double eps, Matrix <double, _n,_n> &B)
@@ -483,7 +480,7 @@ Matrix <double, _n, _n> Matrix<Type, _n, _n>::gaussMethod(double eps, Matrix <do
 
 
 
-//////////////   ОБРАТНАЯ  \\\\\\\\\
+//////////////   ОБРАТНАЯ
 
 template <typename Type, int _n>
 Matrix <double, _n, _n> Matrix<Type, _n, _n>::inverse() {
