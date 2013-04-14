@@ -19,6 +19,7 @@ Matrix<Type, _hi, _wid>::Matrix():hi(_hi), wid(_wid){
             matrix[i] = new Type [wid];
         } catch (std::bad_alloc& ba) {
           std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+          throw ("bad_alloc_was");
         }
     }
 }
@@ -31,12 +32,14 @@ Matrix<Type, _hi, _wid>::Matrix (Matrix<Type, _hi, _wid> const& a):hi(_hi), wid(
         matrix = new Type* [hi];
     } catch (std::bad_alloc& ba) {
        std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+       throw ("bad_alloc_was");
     }
     for (int i = 0; i < _hi; ++i) {
         try {
             matrix[i] = new Type [wid];
         } catch (std::bad_alloc& ba) {
           std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+          throw ("bad_alloc_was");
         }
     }
     for (int i = 0; i < _hi; ++i) {
@@ -137,6 +140,17 @@ Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (Matrix &a) {
     return *this;
 }
 
+//////////////   ПРИСВАИВАНИЕ const
+template <typename Type, int _hi, int _wid>
+Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (const Matrix &a) {
+    for (int i = 0; i < _hi; ++i) {
+        for (int j = 0; j < wid; ++j) {
+            this->matrix[i][j] = a.matrix[i][j];
+        }
+    }
+    return *this;
+}
+
 
 //////////////  ТРАНСПОНИРОВАНИЕ
 
@@ -199,12 +213,14 @@ Matrix<Type, _n, _n>::Matrix():n(_n){
         matrix = new Type* [n];
     } catch (std::bad_alloc& ba) {
        std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+       throw ("bad_alloc_was");
     }
     for (int i = 0; i < _n; ++i) {
         try {
             matrix[i] = new Type [_n];
         } catch (std::bad_alloc& ba) {
           std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+          throw ("bad_alloc_was");
         }
     }
 }
@@ -220,6 +236,7 @@ Matrix<Type, _n, _n>::Matrix(Type x):n(_n){
         matrix = new Type* [n];
     } catch (std::bad_alloc& ba) {
        std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+       throw ("bad_alloc_was");
     }
     for (int i = 0; i < _n; ++i) {
         try {
@@ -229,6 +246,7 @@ Matrix<Type, _n, _n>::Matrix(Type x):n(_n){
             }
         } catch (std::bad_alloc& ba) {
           std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+          throw ("bad_alloc_was");
         }
     }
     for (int i = 0; i < _n; ++i){
@@ -247,12 +265,14 @@ Matrix<Type, _n, _n>::Matrix (Matrix<Type, _n, _n> const& a):n(_n){
         matrix = new Type* [n];
     } catch (std::bad_alloc& ba) {
        std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+       throw ("bad_alloc_was");
     }
     for (int i = 0; i < _n; ++i) {
         try {
             matrix[i] = new Type [n];
         } catch (std::bad_alloc& ba) {
           std::cerr << "bad_alloc caught: " << ba.what() << '\n';
+          throw ("bad_alloc_was");
         }
     }
     for (int i = 0; i < _n; ++i) {
@@ -345,7 +365,7 @@ Matrix <Type, _n, _n> Matrix<Type, _n, _n>::operator - (const Matrix &a) const {
 //////////////   ПРИСВАИВАНИЕ
 
 template <typename Type, int _n>
-Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix a){
+Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix &a){
     for (int i = 0; i < _n; ++i) {
         for (int j = 0; j < n; ++j) {
             this->matrix[i][j] = a.matrix[i][j];
@@ -354,6 +374,15 @@ Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix a){
     return *this;
 }
 
+template <typename Type, int _n>
+Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (const Matrix &a){
+    for (int i = 0; i < _n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            this->matrix[i][j] = a.matrix[i][j];
+        }
+    }
+    return *this;
+}
 
 //////////////   ОПЕРАТОР УМНОЖЕНИЯ
 
