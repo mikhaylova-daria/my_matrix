@@ -60,7 +60,7 @@ Matrix<Type, _hi, _wid>::~Matrix() {
 //////////////   ИНДЕКСАЦИЯ
 
 template <typename Type, int _hi, int _wid>
-Type* Matrix <Type , _hi, _wid>::operator [](int i) {
+Type* Matrix <Type , _hi, _wid>::operator [](int i) const {
     if (i < _hi) {
         return matrix[i];
     } else {
@@ -99,7 +99,7 @@ void Matrix<Type, _hi, _wid>::output() {
 //////////////  СЛОЖЕНИЕ
 
 template <typename Type, int _hi, int _wid>
-Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator + (Matrix a){
+Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator + (const Matrix &a) const{
     Matrix<Type, _hi, _wid> result;
     for (int i = 0; i < _hi; ++i) {
         for (int j = 0; j < wid; ++j) {
@@ -113,7 +113,7 @@ Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator + (Matrix a){
 //////////////   ВЫЧИТАНИЕ
 
 template <typename Type, int _hi, int _wid>
-Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator - (Matrix a){
+Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator - (const Matrix &a)const{
     Matrix result;
     for (int i = 0; i < _hi; ++i) {
         for (int j = 0; j < wid; ++j) {
@@ -128,7 +128,7 @@ Matrix <Type, _hi, _wid> Matrix<Type, _hi, _wid>::operator - (Matrix a){
 
 //////////////   ПРИСВАИВАНИЕ
 template <typename Type, int _hi, int _wid>
-Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (Matrix a){
+Matrix<Type, _hi, _wid> & Matrix<Type, _hi, _wid>::operator = (Matrix &a) {
     for (int i = 0; i < _hi; ++i) {
         for (int j = 0; j < wid; ++j) {
             this->matrix[i][j] = a.matrix[i][j];
@@ -277,7 +277,7 @@ Matrix<Type, _n, _n>::~Matrix() {
 //////////////   ИНДЕКСАЦИЯ
 
 template <typename Type, int _n>
-Type* Matrix <Type , _n, _n>::operator [](int i) {
+Type* Matrix <Type , _n, _n>::operator [](int i) const {
     if (i < _n) {
         return matrix[i];
     } else {
@@ -317,7 +317,7 @@ void Matrix <Type, _n, _n>::output() {
 //////////////   СЛОЖЕНИЕ
 
 template <typename Type, int _n>
-Matrix <Type, _n, _n> Matrix<Type, _n,_n>::operator + (Matrix a){
+Matrix <Type, _n, _n> Matrix<Type, _n,_n>::operator + (const Matrix & a) const {
     Matrix<Type, _n, _n> result;
     for (int i = 0; i < _n; ++i) {
         for (int j = 0; j < n; ++j) {
@@ -331,7 +331,7 @@ Matrix <Type, _n, _n> Matrix<Type, _n,_n>::operator + (Matrix a){
 //////////////   ВЫЧИТАНИЕ
 
 template <typename Type, int _n>
-Matrix <Type, _n, _n> Matrix<Type, _n, _n>::operator - (Matrix a){
+Matrix <Type, _n, _n> Matrix<Type, _n, _n>::operator - (const Matrix &a) const {
     Matrix result;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
@@ -358,7 +358,7 @@ Matrix<Type, _n, _n> & Matrix<Type, _n, _n>::operator = (Matrix a){
 //////////////   ОПЕРАТОР УМНОЖЕНИЯ
 
 template <typename Type, int _n>
-    Matrix<Type, _n, _n>  Matrix<Type, _n, _n>::operator * (Matrix a){
+    Matrix<Type, _n, _n>  Matrix<Type, _n, _n>::operator * (const Matrix &a) const {
     Matrix<Type, _n, _n> result;
     Type sum(0);
     Type null(0);
@@ -405,7 +405,7 @@ double Matrix <Type, _n, _n>::det(){
 //////////////   ТРАНСПОНИРОВАНИЕ
 
 template <typename Type, int _n>
-Matrix<Type, _n, _n>  Matrix <Type, _n, _n>::T()
+Matrix<Type, _n, _n>  Matrix <Type, _n, _n>::T() const
 {
     Matrix <Type, _n, _n> A;
     for (int i = 0; i < _n; ++i) {
@@ -420,7 +420,7 @@ Matrix<Type, _n, _n>  Matrix <Type, _n, _n>::T()
 //////////////   ГАУСС
 
 template <typename Type, int _n>
-Matrix <double, _n, _n> Matrix<Type, _n, _n>::gaussMethod(double eps, Matrix <double, _n,_n> &B)
+Matrix <double, _n, _n> Matrix<Type, _n, _n>::gaussMethod(double eps, Matrix <double, _n,_n> &B) const
 {
     Matrix <double, _n, _n> E(1.0);
     B = E;
@@ -483,7 +483,7 @@ Matrix <double, _n, _n> Matrix<Type, _n, _n>::gaussMethod(double eps, Matrix <do
 //////////////   ОБРАТНАЯ
 
 template <typename Type, int _n>
-Matrix <double, _n, _n> Matrix<Type, _n, _n>::inverse() {
+Matrix <double, _n, _n> Matrix<Type, _n, _n>::inverse() const {
     Type null(0);
     Matrix <double, _n, _n> answer(0);
     Matrix <double, _n, _n> half;

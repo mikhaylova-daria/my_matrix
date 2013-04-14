@@ -26,10 +26,25 @@ public:
     Matrix();
     Matrix (const Matrix&);
     ~Matrix();
-    Matrix operator + (Matrix a);
-    Matrix operator - (Matrix a);
-    Type* operator [](int i);
-    Matrix& operator = (Matrix a);
+    Matrix operator + (const Matrix &a) const;
+    Matrix operator - (const Matrix &a) const;
+    template <int wi>
+    Matrix<Type, _hi, wi> operator*(Matrix<Type, _wid, wi> const & other) const {
+        Matrix<Type, _hi, wi> result;
+        Type null(0);
+        for (int i = 0; i < _hi; ++i) {
+            for (int j = 0; j < wi; ++j) {
+                result[i][j] = null;
+                for (int k = 0; k < wi; ++k) {
+                    result[i][j] = result[i][j] + (*this[i])[k] * other[k][j];
+                }
+            }
+        }
+        return result;
+    }
+
+    Type* operator [](int i) const; //не обязан быть const, но иначе работать для const не будет
+    Matrix& operator = (Matrix &a);
     Matrix<Type, _wid, _hi> T();
     void input();
     void output();
@@ -43,15 +58,15 @@ public:
     Matrix (Type);
     Matrix (const Matrix&);
     ~Matrix ();
-    Matrix operator + (Matrix a);
-    Matrix operator - (Matrix a);
-    Matrix operator * (Matrix a);
-    Type* operator [] (int i);
+    Matrix operator + (const Matrix &a) const;
+    Matrix operator - (const Matrix &a) const;
+    Matrix operator * (const Matrix &a) const;
+    Type* operator [] (int i) const;
     Matrix& operator = (Matrix a);
-    Matrix T();
-    Matrix<double, _n,_n> inverse();
-    Matrix<double, _n, _n> gaussMethod(double, Matrix <double, _n,_n> &B);
-    Type trace();
+    Matrix T() const;
+    Matrix<double, _n,_n> inverse() const;
+    Matrix<double, _n, _n> gaussMethod(double, Matrix <double, _n,_n> &B) const;
+    Type trace() ;
     double det();
     void input();
     void output();
